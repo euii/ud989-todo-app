@@ -13,7 +13,8 @@ var app = app || {};
 		// and ensure that each todo created has `title` and `completed` keys.
 		defaults: {
 			title: '',
-			completed: false
+			completed: false,
+			important: false,
 		},
 
 		// Toggle the `completed` state of this todo item.
@@ -21,6 +22,12 @@ var app = app || {};
 			this.save({
 				completed: !this.get('completed')
 			});
-		}
+		},
+
+		importantToggle: function () {
+			this.save({
+				important: !this.get('important')
+			});
+		},
 	});
 })();

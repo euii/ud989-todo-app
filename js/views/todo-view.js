@@ -24,6 +24,7 @@ var app = app || {};
 			'keydown .edit': 'revertOnEscape',
 			'blur .edit': 'close',
 			'click .edit-btn': 'edit',
+			'click .priority-btn': 'makeImportant'
 		},
 
 		// The TodoView listens for changes to its model, re-rendering. Since
@@ -51,6 +52,7 @@ var app = app || {};
 
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('completed', this.model.get('completed'));
+			this.$el.toggleClass('priority',this.model.get('important'));
 			this.toggleVisible();
 			this.$input = this.$('.edit');
 			return this;
@@ -70,6 +72,7 @@ var app = app || {};
 		toggleCompleted: function () {
 			this.model.toggle();
 		},
+
 
 		// Switch this view into `"editing"` mode, displaying the input field.
 		edit: function () {
@@ -128,6 +131,11 @@ var app = app || {};
 		// Remove the item, destroy the model from *localStorage* and delete its view.
 		clear: function () {
 			this.model.destroy();
+		},
+
+		makeImportant: function () {
+			this.model.importantToggle();
+			// console.log("important");
 		}
 	});
 })(jQuery);
